@@ -3,7 +3,13 @@ guid: fa65e03cc4bd71c4d88ef0e1a0a3f828
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen
+    second: {fileID: -6474273353556072807, guid: 6be7dfb017ab4224cb11cb393f5cc258,
+      type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
