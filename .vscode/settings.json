@@ -52,5 +52,6 @@
         "temp/":true,
         "Temp/":true
     },
-    "dotnet.defaultSolution": "OstreOmlety.sln"
+    "dotnet.defaultSolution": "OstreOmlety.sln",
+    "dotnet.preferCSharpExtension": true
 }
