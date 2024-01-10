@@ -17,6 +17,7 @@ public class PC_interakcja : MonoBehaviour
     public RawImage test;
 
     public Camera cam_na_kompa;
+    public Image celownik;
 
     private float odleglosc_max;
     private bool aktywowany;
@@ -49,6 +50,7 @@ public class PC_interakcja : MonoBehaviour
                 cam.enabled = false;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
+                celownik.enabled = false;
             }
         }
         if(Input.GetKeyDown(KeyCode.Q) && aktywowany)
@@ -61,6 +63,7 @@ public class PC_interakcja : MonoBehaviour
             cam_na_kompa.enabled = false;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            celownik.enabled = true;
             pole_tekstowe.text = tekst;
             poczekaj = 0f;
         }
