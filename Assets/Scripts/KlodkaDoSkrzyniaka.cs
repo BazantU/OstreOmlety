@@ -6,7 +6,7 @@ using UnityEngine;
 public class KlodkaDoSkrzyniaka : MonoBehaviour
 {
     private bool otwartaKlodka;
-    private bool rozwiazanaZagadka;
+    public bool rozwiazanaZagadka;
     public Transform player;
     public float pickUpRange;
     public Transform cum;
@@ -32,8 +32,14 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
     public GameObject plane9;
     public GameObject plane10;
     public GameObject plane11;
+    public GameObject oska;
     Vector3 pPosition;
-    private bool pokaz;
+    public bool pokaz;
+    public Pickup pickup;
+    public PickupKartka pickup2;
+    public GameObject klapa;
+
+    public bool rozwiazanaZagadka2;
 
 
     // Start is called before the first frame update
@@ -41,6 +47,7 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
     {
         otwartaKlodka = false;
         rozwiazanaZagadka = false;
+        rozwiazanaZagadka2 = false;
         pokaz = false;
     }
 
@@ -66,9 +73,12 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
             plane10.SetActive(false);
             plane11.SetActive(false);
         }
+
         Vector3 distanceToPlayer = player.position - transform.position;
-        if (Input.GetKeyDown(KeyCode.E) && distanceToPlayer.magnitude <= pickUpRange && !rozwiazanaZagadka)
+        if (Input.GetKeyDown(KeyCode.E) && distanceToPlayer.magnitude <= pickUpRange && !Pickup.slotFull && !PickupKartka.slotFull)
         {
+            Pickup.slotFull = true;
+            PickupKartka.slotFull = true;
             pokaz = true;
             pPosition = player.transform.position;
             text11.SetActive(true);
@@ -94,14 +104,25 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
             cam.transform.localRotation = Quaternion.Euler(Vector3.zero);
             player.GetComponent<Player>().enabled = false;
             cam.GetComponent<SC_HeadBobber>().enabled = false;
-            
+            player.transform.localPosition = Vector3.zero;
+            player.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
         }
+        
         if (text1.text == "H" && text2.text == "E" && text3.text == "Z" && text4.text == "O" && text5.text == "A") 
         {
             rozwiazanaZagadka = true;
         }
-        if (Input.GetKeyDown(KeyCode.Q) && distanceToPlayer.magnitude <= pickUpRange)
+
+        if (text1.text == "8" && text2.text == "1" && text3.text == "1" && text4.text == "1" && text5.text == "1")
         {
+            rozwiazanaZagadka2 = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && distanceToPlayer.magnitude <= pickUpRange && player.transform.parent == cum)
+        {
+            Pickup.slotFull = false;
+            PickupKartka.slotFull = false;
             pokaz = false;
             player.transform.SetParent(null);
             player.transform.position = pPosition;
@@ -109,11 +130,6 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             player.GetComponent<Player>().enabled = true;
             cam.GetComponent<SC_HeadBobber>().enabled = true;
-            text11.SetActive(false);
-            text12.SetActive(false);
-            text13.SetActive(false);
-            text14.SetActive(false);
-            text15.SetActive(false);
             text11.SetActive(false);
             text12.SetActive(false);
             text13.SetActive(false);
@@ -131,10 +147,13 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
             plane10.SetActive(false);
             plane11.SetActive(false);
         }
-        if (rozwiazanaZagadka == true)
+        
+        if (rozwiazanaZagadka || rozwiazanaZagadka2)
         {
-            pokaz = true;
-            transform.localRotation = Quaternion.Euler(0f, -180f, 0f);
+            Pickup.slotFull = false;
+            PickupKartka.slotFull = false;
+            pokaz = false;
+            oska.transform.localRotation = Quaternion.Euler(-89.98f, -180f, 0f);
             otwartaKlodka = true;
             player.transform.SetParent(null);
             player.transform.position = pPosition;
@@ -142,22 +161,19 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             player.GetComponent<Player>().enabled = true;
             cam.GetComponent<SC_HeadBobber>().enabled = true;
-            text11.SetActive(true);
-            text12.SetActive(true);
-            text13.SetActive(true);
-            text14.SetActive(true);
-            text15.SetActive(true);
-            plane1.SetActive(true);
-            plane2.SetActive(true);
-            plane3.SetActive(true);
-            plane4.SetActive(true);
-            plane5.SetActive(true);
-            plane6.SetActive(true);
-            plane7.SetActive(true);
-            plane8.SetActive(true);
-            plane9.SetActive(true);
-            plane10.SetActive(true);
-            plane11.SetActive(true);
+        }
+        if (rozwiazanaZagadka && distanceToPlayer.magnitude <= pickUpRange)
+        {
+            klapa.transform.localPosition = new Vector3(0.085f, 0f, 0.2f);
+            klapa.transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
+            
+        }
+
+        if (rozwiazanaZagadka2 && distanceToPlayer.magnitude <= pickUpRange)
+        {
+            klapa.transform.localPosition = new Vector3(0.085f, 0f, 0.2f);
+            klapa.transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
+            
         }
     }
 }

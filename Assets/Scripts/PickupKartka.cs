@@ -16,6 +16,8 @@ public class PickupKartka : MonoBehaviour
 
     private Vector3 size;
 
+    Vector3 distanceToPlayer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,12 +36,18 @@ public class PickupKartka : MonoBehaviour
             GetComponent<Rigidbody>().useGravity = true;
         }
     }
+    
+
+    private void OnMouseOver()
+    {
+        if (!equiped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equiped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
+        distanceToPlayer = player.position - transform.position;
+        
 
         if (equiped)
         {

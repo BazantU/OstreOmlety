@@ -13,8 +13,10 @@ public class Pickup : MonoBehaviour
 
     public bool equiped;
     public static bool slotFull;
+    public PickupKartka pickup;
 
     private Vector3 size;
+    Vector3 distanceToPlayer;
 
 
     // Start is called before the first frame update
@@ -32,14 +34,24 @@ public class Pickup : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    private void OnMouseOver()
+    {
+
+        if (!equiped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !PickupKartka.slotFull) PickUp();
+    }
+
     void Update()
     {
-        Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equiped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
+        distanceToPlayer = player.position - transform.position;
+        
 
         if (equiped && Input.GetKeyDown(KeyCode.Q)) Drop();
 
+        if (equiped)
+        {
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.Euler(Vector3.zero);
+        }
     }
     private void PickUp()
     {
@@ -49,7 +61,7 @@ public class Pickup : MonoBehaviour
         transform.localRotation = Quaternion.Euler(Vector3.zero);
         transform.localScale = size;
         equiped = true;
-        slotFull = true;
+        PickupKartka.slotFull = true;
         body.isKinematic = true;
         bcollider.isTrigger = true;
 
@@ -57,7 +69,7 @@ public class Pickup : MonoBehaviour
     private void Drop()
     {
         equiped = false;
-        slotFull = false;
+        PickupKartka.slotFull = false;
         transform.SetParent(null);
         body.isKinematic = false;
         bcollider.isTrigger = false;
