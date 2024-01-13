@@ -17,6 +17,9 @@ public class Laptopik : MonoBehaviour
     Vector3 pPosition;
     public GameObject cam;
     public static bool rozwiaz;
+    public GameObject kartka2;
+    public bool pokazLaptoka2;
+    public GameObject dzi;
 
 
     // Start is called before the first frame update
@@ -26,25 +29,29 @@ public class Laptopik : MonoBehaviour
         text1.text = null;
         rozwiaz = false;
         text1 = text.GetComponent<TextMesh>();
-
+        kartka2.SetActive(false);
+        pokazLaptoka2 = false;
     }
 
     private void OnMouseOver()
     {
-        if (Input.GetKeyDown(KeyCode.E) && odleglosc.magnitude <= odlegloscPodnoszenia && !Pickup.slotFull && !Pickup2.slotFull && !rozwiaz)
+        if (Input.GetKeyDown(KeyCode.E) && odleglosc.magnitude <= odlegloscPodnoszenia && !rozwiaz && PendriveDoLaptopika.trzymany)
+        {
+            PendriveDoLaptopika.trzymany2 = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && odleglosc.magnitude <= odlegloscPodnoszenia && !PendriveDoLaptopika.trzymany && PendriveDoLaptopika.udaloSie)
         {
             pPosition = player.position;
             pokazLaptoka = true;
             player.SetParent(cum);
             player.transform.localPosition = Vector3.zero;
             player.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            Pickup.slotFull = true;
-            Pickup2.slotFull = true;
+
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
             player.GetComponent<Player>().enabled = false;
             cam.GetComponent<SC_HeadBobber>().enabled = false;
-            
+
         }
     }
 
@@ -54,7 +61,7 @@ public class Laptopik : MonoBehaviour
         odleglosc = player.position - transform.position;
 
 
-        if (Input.GetKeyDown(KeyCode.Escape) && Pickup.slotFull && Pickup2.slotFull && pokazLaptoka)
+        if (Input.GetKeyDown(KeyCode.Escape) && pokazLaptoka)
         {
             pokazLaptoka = false;
             player.SetParent(null);
@@ -63,56 +70,39 @@ public class Laptopik : MonoBehaviour
             cam.GetComponent<SC_HeadBobber>().enabled = true;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            Pickup.slotFull = false;
-            Pickup2.slotFull = false;
+
 
         }
-
+        //if (text1.text == "cidH8Wp)qi8K(b!M" && Input.GetKeyDown(KeyCode.Return)) rozwiaz = true;
+        if (text1.text == "pup") rozwiaz = true;
+        if (rozwiaz)
+        {
+            text.SetActive(false);
+            if (pokazLaptoka) kartka2.SetActive(true);
+            else kartka2.SetActive(false);
+            pokazLaptoka2 = true;
+            dzi.transform.localRotation = Quaternion.Euler(-90, 150, 180);
+            dzi.transform.localPosition = new Vector3(0.172800004f, 0.0360002518f, -0.224999994f);
+        }
         if (pokazLaptoka)
         {
-            
+
             foreach (char c in Input.inputString)
             {
-                if (c == '\b') // has backspace/delete been pressed?
+                if (c == '\b')
                 {
                     if (text1.text.Length != 0)
                     {
                         text1.text = text1.text.Substring(0, text1.text.Length - 1);
                     }
                 }
-                else if (rozwiaz)
-                {
-                    pokazLaptoka = false;
-                    player.SetParent(null);
-                    player.transform.position = pPosition;
-                    player.GetComponent<Player>().enabled = true;
-                    cam.GetComponent<SC_HeadBobber>().enabled = true;
-                    Cursor.visible = false;
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Pickup.slotFull = false;
-                    Pickup2.slotFull = false;
-                }
-                else if ((c == '\n') || (c == '\r')) // enter/return
-                {
-                    checkIf();
-                }
                 else
                 {
                     text1.text += c;
                 }
-                if (rozwiaz)
-                {
-                    pokazLaptoka = false;
-                    player.SetParent(null);
-                    player.transform.position = pPosition;
-                    player.GetComponent<Player>().enabled = true;
-                    cam.GetComponent<SC_HeadBobber>().enabled = true;
-                    Cursor.visible = false;
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Pickup.slotFull = false;
-                    Pickup2.slotFull = false;
-                }
             }
+            
+            
         }
     }
 
@@ -128,14 +118,16 @@ public class Laptopik : MonoBehaviour
     {
         tapeta.SetActive(true);
         text.SetActive(true);
+        if (pokazLaptoka2) text.SetActive(false);
     }
     void schowajFunkcja()
     {
         tapeta.SetActive(false);
         text.SetActive(false);
     }
-    void checkIf()
+    bool checkIf()
     {
-        if (text1.text == "cidH8Wp)qi8K(b!M") rozwiaz = true;
+        if (text1.text == "cidH8Wp)qi8K(b!M" && Input.GetKeyDown(KeyCode.KeypadEnter)) rozwiaz = true;
+        return rozwiaz;
     }
 }
