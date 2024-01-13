@@ -13,7 +13,7 @@ public class Pickup : MonoBehaviour
 
     public bool equiped;
     public static bool slotFull;
-    public PickupKartka pickup;
+    
 
     private Vector3 size;
     Vector3 distanceToPlayer;

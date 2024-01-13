@@ -38,6 +38,12 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
     public Pickup pickup;
     public PickupKartka pickup2;
     public GameObject klapa;
+    int papa1 = 1;
+    int papa2 = 1;
+    Vector3 distanceToPlayer;
+    public BoxCollider kolajder;
+    public GameObject pen;
+    
 
     public bool rozwiazanaZagadka2;
 
@@ -49,32 +55,11 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
         rozwiazanaZagadka = false;
         rozwiazanaZagadka2 = false;
         pokaz = false;
+        pen.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseOver()
     {
-        if (!pokaz)
-        {
-            text11.SetActive(false);
-            text12.SetActive(false);
-            text13.SetActive(false);
-            text14.SetActive(false);
-            text15.SetActive(false);
-            plane1.SetActive(false);
-            plane2.SetActive(false);
-            plane3.SetActive(false);
-            plane4.SetActive(false);
-            plane5.SetActive(false);
-            plane6.SetActive(false);
-            plane7.SetActive(false);
-            plane8.SetActive(false);
-            plane9.SetActive(false);
-            plane10.SetActive(false);
-            plane11.SetActive(false);
-        }
-
-        Vector3 distanceToPlayer = player.position - transform.position;
         if (Input.GetKeyDown(KeyCode.E) && distanceToPlayer.magnitude <= pickUpRange && !Pickup.slotFull && !PickupKartka.slotFull)
         {
             Pickup.slotFull = true;
@@ -108,6 +93,31 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
             player.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
         }
+    }
+    void Update()
+    {
+        if (!pokaz)
+        {
+            text11.SetActive(false);
+            text12.SetActive(false);
+            text13.SetActive(false);
+            text14.SetActive(false);
+            text15.SetActive(false);
+            plane1.SetActive(false);
+            plane2.SetActive(false);
+            plane3.SetActive(false);
+            plane4.SetActive(false);
+            plane5.SetActive(false);
+            plane6.SetActive(false);
+            plane7.SetActive(false);
+            plane8.SetActive(false);
+            plane9.SetActive(false);
+            plane10.SetActive(false);
+            plane11.SetActive(false);
+        }
+
+        distanceToPlayer = player.position - transform.position;
+        
         
         if (text1.text == "H" && text2.text == "E" && text3.text == "Z" && text4.text == "O" && text5.text == "A") 
         {
@@ -148,8 +158,24 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
             plane11.SetActive(false);
         }
         
-        if (rozwiazanaZagadka || rozwiazanaZagadka2)
+        if (rozwiazanaZagadka && papa1 == 1)
         {
+            papa1 = 0;
+            Pickup.slotFull = false;
+            PickupKartka.slotFull = false;
+            pokaz = false;
+            oska.transform.localRotation = Quaternion.Euler(-89.98f, -180f, 0f);
+            otwartaKlodka = true;
+            player.transform.SetParent(null);
+            player.transform.position = pPosition;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            player.GetComponent<Player>().enabled = true;
+            cam.GetComponent<SC_HeadBobber>().enabled = true;
+        }
+        if (rozwiazanaZagadka2 && papa2 == 1)
+        {
+            papa2 = 0;
             Pickup.slotFull = false;
             PickupKartka.slotFull = false;
             pokaz = false;
@@ -166,6 +192,7 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
         {
             klapa.transform.localPosition = new Vector3(0.085f, 0f, 0.2f);
             klapa.transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
+            kolajder.enabled = false;
             
         }
 
@@ -173,7 +200,9 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
         {
             klapa.transform.localPosition = new Vector3(0.085f, 0f, 0.2f);
             klapa.transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
-            
+            kolajder.enabled=false;
+            pen.SetActive(true);
         }
+        
     }
 }

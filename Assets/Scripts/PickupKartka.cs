@@ -18,22 +18,26 @@ public class PickupKartka : MonoBehaviour
 
     Vector3 distanceToPlayer;
 
+    Vector3 siu = new Vector3(-13.7505999f, 4.22580004f, 9.02980042f);
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         if (!equiped)
         {
-            body.isKinematic = false;
+            if (siu == transform.position) body.isKinematic = true;
+            else body.isKinematic = false;
             bcollider.isTrigger = false;
-            GetComponent<Rigidbody>().useGravity = false;
+            body.useGravity = false;
 
         }
         if (equiped)
         {
             body.isKinematic = true;
             bcollider.isTrigger = true;
-            GetComponent<Rigidbody>().useGravity = true;
+            body.useGravity = true;
         }
     }
     

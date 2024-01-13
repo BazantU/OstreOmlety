@@ -80,10 +80,6 @@ public class Laptopik : MonoBehaviour
                         text1.text = text1.text.Substring(0, text1.text.Length - 1);
                     }
                 }
-                else if ((c == '\n') || (c == '\r')) // enter/return
-                {
-                    checkIf();
-                }
                 else if (rozwiaz)
                 {
                     pokazLaptoka = false;
@@ -96,9 +92,25 @@ public class Laptopik : MonoBehaviour
                     Pickup.slotFull = false;
                     Pickup2.slotFull = false;
                 }
+                else if ((c == '\n') || (c == '\r')) // enter/return
+                {
+                    checkIf();
+                }
                 else
                 {
                     text1.text += c;
+                }
+                if (rozwiaz)
+                {
+                    pokazLaptoka = false;
+                    player.SetParent(null);
+                    player.transform.position = pPosition;
+                    player.GetComponent<Player>().enabled = true;
+                    cam.GetComponent<SC_HeadBobber>().enabled = true;
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Pickup.slotFull = false;
+                    Pickup2.slotFull = false;
                 }
             }
         }
