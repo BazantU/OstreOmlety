@@ -73,8 +73,8 @@ public class Laptopik : MonoBehaviour
 
 
         }
-        //if (text1.text == "cidH8Wp)qi8K(b!M" && Input.GetKeyDown(KeyCode.Return)) rozwiaz = true;
-        if (text1.text == "pup") rozwiaz = true;
+        if (text1.text == "cidH8Wp)qi8K(b!M" && Input.GetKeyDown(KeyCode.Return)) rozwiaz = true;
+        //if (text1.text == "pup") rozwiaz = true;
         if (rozwiaz)
         {
             text.SetActive(false);
@@ -124,10 +124,5 @@ public class Laptopik : MonoBehaviour
     {
         tapeta.SetActive(false);
         text.SetActive(false);
-    }
-    bool checkIf()
-    {
-        if (text1.text == "cidH8Wp)qi8K(b!M" && Input.GetKeyDown(KeyCode.KeypadEnter)) rozwiaz = true;
-        return rozwiaz;
     }
 }
