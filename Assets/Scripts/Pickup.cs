@@ -73,7 +73,6 @@ public class Pickup : MonoBehaviour
         transform.SetParent(null);
         body.isKinematic = false;
         bcollider.isTrigger = false;
-        body.velocity = player.GetComponent<Rigidbody>().velocity;
         body.AddForce(cam.forward * dropForwardForce, ForceMode.Impulse);
         body.AddForce(cam.up * dropUpwardForce, ForceMode.Impulse);
         float random = Random.Range(-1f, 1f);

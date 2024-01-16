@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class KlodkaDoSkrzyniaka : MonoBehaviour
 {
-    private bool otwartaKlodka;
     public bool rozwiazanaZagadka;
     public Transform player;
     public float pickUpRange;
