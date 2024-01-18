@@ -128,12 +128,8 @@ public class Outline : MonoBehaviour {
       Bake();
     }
   }
-    private void Start()
-    {
-        GetComponent<Outline>().enabled = false;
-    }
 
-    void OnMouseEnter() {
+  void Update() {
     if (needsUpdate) {
       needsUpdate = false;
 

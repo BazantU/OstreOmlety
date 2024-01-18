@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Object
   - Przycisk
+  - Drzwi
+  - Item
   layers:
   - Default
   - TransparentFX
