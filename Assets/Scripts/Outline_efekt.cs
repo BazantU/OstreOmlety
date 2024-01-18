@@ -14,18 +14,18 @@ public class Outline_efekt : MonoBehaviour
 
     private GameObject podswietlony_przedmiot;
     private Outline outline_przedmiotu;
+    public Transform reka;
 
 
 
     private bool spelnia_wymagania(GameObject obiekt)
     {
-        if(obiekt.GetComponent<Outline>())
+        if(obiekt.GetComponent<Outline>() && obiekt.transform.parent != reka)
         {
             return true;
         }
         else
         {   
-            Debug.LogWarning($"Przedmiot: [{obiekt}] nie spelnia wymagan!");
             return false;
         }
     }
