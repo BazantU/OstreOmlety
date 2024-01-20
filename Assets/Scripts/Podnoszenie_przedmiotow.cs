@@ -9,7 +9,7 @@ public class Podnoszenie_przedmiotow : MonoBehaviour
     public Player player_controller;
     private float max_odleglosc;
 
-    private Transform trzymany_przedmiot;
+    [HideInInspector] public Transform trzymany_przedmiot;
     private Rigidbody rg_body;
 
     public float dropForwardForce, dropUpwardForce;

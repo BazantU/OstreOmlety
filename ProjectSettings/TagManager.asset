@@ -8,6 +8,8 @@ TagManager:
   - Przycisk
   - Drzwi
   - Item
+  - Czytnik
+  - Zamek
   layers:
   - Default
   - TransparentFX

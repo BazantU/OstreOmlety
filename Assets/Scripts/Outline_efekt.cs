@@ -12,7 +12,7 @@ public class Outline_efekt : MonoBehaviour
 
     public List<string> dozwolony_tag = new List<string>();
 
-    private GameObject podswietlony_przedmiot;
+    [HideInInspector] public GameObject podswietlony_przedmiot;
     private Outline outline_przedmiotu;
     public Transform reka;
 
@@ -43,8 +43,12 @@ public class Outline_efekt : MonoBehaviour
         {   
             if(spelnia_wymagania(hit.transform.gameObject))
             {   
+                Outline stary_outline = outline_przedmiotu;
+
                 podswietlony_przedmiot = hit.transform.gameObject;
                 outline_przedmiotu = podswietlony_przedmiot.GetComponent<Outline>();
+
+                if(stary_outline && stary_outline.enabled){stary_outline.enabled = false;}
             }
         }
         else if(podswietlony_przedmiot && outline_przedmiotu)
