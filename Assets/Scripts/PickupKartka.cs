@@ -64,7 +64,7 @@ public class PickupKartka : MonoBehaviour
     }
     private void PickUp()
     {
-        GetComponent<Rigidbody>().useGravity = true;
+        body.useGravity = false;
         size = transform.localScale;
         transform.SetParent(hand);
         transform.localPosition = Vector3.zero;
@@ -78,12 +78,12 @@ public class PickupKartka : MonoBehaviour
     }
     private void Drop()
     {
+        body.useGravity = true;
         equiped = false;
         slotFull = false;
         transform.SetParent(null);
         body.isKinematic = false;
         bcollider.isTrigger = false;
-        body.velocity = player.GetComponent<Rigidbody>().velocity;
         body.AddForce(cam.forward * dropForwardForce, ForceMode.Impulse);
         body.AddForce(cam.up * dropUpwardForce, ForceMode.Impulse);
         transform.localScale = size;

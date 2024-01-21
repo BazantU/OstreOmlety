@@ -16,15 +16,15 @@ public class OtwuszKsiazke : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void OnMouseUpAsButton()
+    private void OnMouseOver()
     {
-        if (!otwarta)
+        if (!otwarta && Input.GetKeyDown(KeyCode.E))
         {
             transform.localPosition = new Vector3(1.541f, 0, 0);
             transform.localRotation = Quaternion.Euler(-269.98f, 180, 0);
             otwarta=true;
         }
-        else if (otwarta)
+        else if (otwarta && Input.GetKeyDown(KeyCode.E))
         {
             transform.localPosition = pozycja;
             transform.localRotation = rotacja;

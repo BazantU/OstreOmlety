@@ -7,7 +7,7 @@ public class PickupRouter : MonoBehaviour
     public static bool trzymany;
     public static bool trzymany2;
     public Rigidbody body;
-    public BoxCollider bcollider;
+    public MeshCollider bcollider;
     public Transform player, hand, cam;
     public float pickUpRange;
     public float dropForwardForce, dropUpwardForce;
@@ -21,11 +21,13 @@ public class PickupRouter : MonoBehaviour
 
     public Transform laptopik;
     public static bool udaloSie;
+    public GameObject kabel;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        kabel.SetActive(false);
         trzymany2 = false;
         udaloSie = false;
         if (!equiped)
@@ -56,14 +58,15 @@ public class PickupRouter : MonoBehaviour
         if (trzymany2)
         {
             transform.SetParent(laptopik);
-            transform.localPosition = new Vector3(0.00159999996f, -0.0518799983f, 0.542200029f);
-            transform.localRotation = Quaternion.Euler(90, 270, 0);
-            transform.localScale = new Vector3(-1.59457374f, -2.14438725f, -0.689524055f);
+            transform.localPosition = new Vector3(-0.368499994f, 0.0270000007f, -1f);
+            transform.localRotation = Quaternion.Euler(270, 90, 0);
+            transform.localScale = new Vector3(7.63311052f, 7.63311052f, 7.63311052f);
             equiped = false;
             trzymany = false;
             udaloSie = true;
             PickupKartka.slotFull = false;
             Pickup.slotFull = false;
+            kabel.SetActive(true);
         }
 
         if (equiped && Input.GetKeyDown(KeyCode.Q)) Drop();
@@ -72,9 +75,8 @@ public class PickupRouter : MonoBehaviour
         {
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.Euler(Vector3.zero);
-            trzymany = true;
+
         }
-        else if (equiped && trzymany2) trzymany = true;
         else trzymany = false;
     }
     private void PickUp()
@@ -88,7 +90,7 @@ public class PickupRouter : MonoBehaviour
         PickupKartka.slotFull = true;
         body.isKinematic = true;
         bcollider.isTrigger = true;
-
+        trzymany = true;
     }
     private void Drop()
     {
@@ -97,7 +99,6 @@ public class PickupRouter : MonoBehaviour
         transform.SetParent(null);
         body.isKinematic = false;
         bcollider.isTrigger = false;
-        body.velocity = player.GetComponent<Rigidbody>().velocity;
         body.AddForce(cam.forward * dropForwardForce, ForceMode.Impulse);
         body.AddForce(cam.up * dropUpwardForce, ForceMode.Impulse);
         float random = Random.Range(-1f, 1f);

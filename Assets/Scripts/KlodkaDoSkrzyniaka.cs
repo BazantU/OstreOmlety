@@ -50,7 +50,6 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        otwartaKlodka = false;
         rozwiazanaZagadka = false;
         rozwiazanaZagadka2 = false;
         pokaz = false;
@@ -84,12 +83,11 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
             player.transform.SetParent(cum);
-            cam.transform.localPosition = Vector3.zero;
-            cam.transform.localRotation = Quaternion.Euler(Vector3.zero);
             player.GetComponent<Player>().enabled = false;
             cam.GetComponent<SC_HeadBobber>().enabled = false;
             player.transform.localPosition = Vector3.zero;
-            player.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            player.transform.localRotation = Quaternion.Euler(Vector3.zero);
+            cam.transform.localRotation = Quaternion.Euler(Vector3.zero);
 
         }
     }
@@ -164,7 +162,6 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
             PickupKartka.slotFull = false;
             pokaz = false;
             oska.transform.localRotation = Quaternion.Euler(-89.98f, -180f, 0f);
-            otwartaKlodka = true;
             player.transform.SetParent(null);
             player.transform.position = pPosition;
             Cursor.visible = false;
@@ -179,7 +176,6 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
             PickupKartka.slotFull = false;
             pokaz = false;
             oska.transform.localRotation = Quaternion.Euler(-89.98f, -180f, 0f);
-            otwartaKlodka = true;
             player.transform.SetParent(null);
             player.transform.position = pPosition;
             Cursor.visible = false;
