@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
 
 
-        if (canMove)
+        if(canMove)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);

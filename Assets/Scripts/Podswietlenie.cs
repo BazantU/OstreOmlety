@@ -49,7 +49,8 @@ public class Podswietlenie : MonoBehaviour
     {
         Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         if(Physics.Raycast(ray, out RaycastHit hit, max_odleglosc)
-            && tagi.Contains(hit.transform.tag))
+            && tagi.Contains(hit.transform.tag)
+            && cam.enabled)
         {   
             if(mozna_podswietlic(hit.transform))
             {   
