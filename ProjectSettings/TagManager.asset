@@ -11,6 +11,8 @@ TagManager:
   - Czytnik
   - Zamek
   - Komputer
+  - Skrzynia
+  - Klodka
   layers:
   - Default
   - TransparentFX
