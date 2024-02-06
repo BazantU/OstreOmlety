@@ -6,6 +6,7 @@ using UnityEngine;
 public class Podswietlenie : MonoBehaviour
 {
     public Camera cam;
+    public Transform reka;
     public List<string> tagi = new List<string>();
 
     private Player player_controller;
@@ -16,7 +17,7 @@ public class Podswietlenie : MonoBehaviour
 
     private bool mozna_podswietlic(Transform obiekt)
     {   
-        if(obiekt.GetComponent<Outline>())
+        if(obiekt.GetComponent<Outline>() && obiekt.parent != reka)
         {
             return true;
         }
