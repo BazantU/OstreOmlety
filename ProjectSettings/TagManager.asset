@@ -15,6 +15,7 @@ TagManager:
   - Klodka
   - SkrzyniaNaKod
   - Pokretlo
+  - Przycisk2
   layers:
   - Default
   - TransparentFX
