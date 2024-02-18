@@ -7,7 +7,7 @@ using System.Linq;
 using System;
 using JetBrains.Annotations;
 using System.Diagnostics.CodeAnalysis;
-using UnityEditor.UI;
+using UnityEngine.UI;
 
 public class Drzwi : MonoBehaviour
 {   
