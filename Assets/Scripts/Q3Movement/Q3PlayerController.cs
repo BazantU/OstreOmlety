@@ -113,6 +113,17 @@ namespace Q3Movement
             }
         }
 
+        // Change cursor state
+        public void ChangeCurrentLockState(bool state)
+        {
+            m_MouseLook.SetCursorLock(state);
+        }
+
+        public void ChangeSensitivity(float value)
+        {
+            m_MouseLook.SetSensitivity(value);
+        }
+
         // Handle air movement.
         private void AirMove()
         {

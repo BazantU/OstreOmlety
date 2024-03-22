@@ -6,7 +6,8 @@ using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Bobbing_v2 : MonoBehaviour
-{
+{   
+    public bool wlaczone = true;
     public Transform camHandler;
     CharacterController controller;
 
@@ -56,7 +57,10 @@ public class Bobbing_v2 : MonoBehaviour
 
     void Update()
     {   
-        obrocKamere();
-        zmienPozycjeKamery();
+        if(wlaczone)
+        {
+            obrocKamere();
+            zmienPozycjeKamery();
+        }
     }
 }

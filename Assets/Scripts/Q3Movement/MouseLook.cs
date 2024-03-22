@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace Q3Movement
@@ -17,10 +18,13 @@ namespace Q3Movement
         [SerializeField] private bool m_Smooth = false;
         [SerializeField] private float m_SmoothTime = 5f;
         [SerializeField] private bool m_LockCursor = true;
+        [SerializeField] private Przyciski_Menu m_czuloscMnoznik;
 
         private Quaternion m_CharacterTargetRot;
         private Quaternion m_CameraTargetRot;
         private bool m_cursorIsLocked = true;
+
+        private float LookAroundFactor = 1f;
 
         public void Init(Transform character, Transform camera)
         {
@@ -30,8 +34,8 @@ namespace Q3Movement
 
         public void LookRotation(Transform character, Transform camera)
         {
-            float yRot = Input.GetAxis("Mouse X") * m_XSensitivity;
-            float xRot = Input.GetAxis("Mouse Y") * m_YSensitivity;
+            float yRot = Input.GetAxis("Mouse X") * m_XSensitivity * m_czuloscMnoznik.czuloscProcent * Time.timeScale;
+            float xRot = Input.GetAxis("Mouse Y") * m_YSensitivity * m_czuloscMnoznik.czuloscProcent * Time.timeScale;
 
             m_CharacterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
             m_CameraTargetRot *= Quaternion.Euler(-xRot, 0f, 0f);
@@ -65,6 +69,12 @@ namespace Q3Movement
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
+        }
+
+        public void SetSensitivity(float value)
+        {
+            m_XSensitivity = value;
+            m_YSensitivity = value;
         }
 
         public void UpdateCursorLock()
