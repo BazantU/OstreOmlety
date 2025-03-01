@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
   m_Name: RenderObjects
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     passTag: RenderObjects
     Event: 450
@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
   m_Name: RenderObjects
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     passTag: RenderObjects
     Event: 300
@@ -103,7 +103,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: -4644087561392818723}
   - {fileID: -3237816586820127635}
-  m_RendererFeatureMap: ddf55ee5f7e28cbf6df4b70ef8f610d3
+  - {fileID: 6661581101618966051}
+  m_RendererFeatureMap: ddf55ee5f7e28cbf6df4b70ef8f610d3232e74a4b7b0725c
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -146,3 +147,26 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &6661581101618966051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22fac7b6a20d4047a1a5c3fc5fbaea7, type: 3}
+  m_Name: OutlineMeshesInLayerFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    isEnabled: 1
+    outlineMaterial: {fileID: 2100000, guid: 0b06996a169a5ad44a6cf90911c37416, type: 2}
+    outlineColor: {r: 1, g: 1, b: 1, a: 1}
+    outlinePixelWidth: 4
+    renderPassEvent: 1000
+    layerToRender:
+      serializedVersion: 2
+      m_Bits: 128
+    useSeperableAxisMethod: 1
