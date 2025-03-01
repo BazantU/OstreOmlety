@@ -18,6 +18,7 @@ public class Pickup : MonoBehaviour
     private Vector3 size;
     Vector3 distanceToPlayer;
 
+    bool mouseOver = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,15 +34,27 @@ public class Pickup : MonoBehaviour
             bcollider.isTrigger = true;
         }
     }
+    
+    private void OnMouseExit(){
+        mouseOver = false;
+    }
 
     private void OnMouseOver()
     {
-
         if (!equiped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !PickupKartka.slotFull) PickUp();
+
+        if(distanceToPlayer.magnitude < pickUpRange){
+            transform.gameObject.layer = LayerMask.NameToLayer("Outline");
+        }
+        mouseOver = true;
     }
 
     void Update()
     {
+        if(distanceToPlayer.magnitude > pickUpRange || !mouseOver){
+            transform.gameObject.layer = LayerMask.NameToLayer("Default");
+        }
+
         distanceToPlayer = player.position - transform.position;
         
 

@@ -22,6 +22,7 @@ public class Laptopik : MonoBehaviour
     public GameObject dzi;
     bool chuj32 = true;
 
+    bool mouseOver = false;
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +35,17 @@ public class Laptopik : MonoBehaviour
         pokazLaptoka2 = false;
     }
 
+    private void OnMouseExit(){
+        mouseOver = false;
+    }
+
     private void OnMouseOver()
     {
+        if(odleglosc.magnitude < odlegloscPodnoszenia){
+            transform.gameObject.layer = LayerMask.NameToLayer("Outline");
+        }
+        mouseOver = true;
+
         if (Input.GetKeyDown(KeyCode.E) && odleglosc.magnitude <= odlegloscPodnoszenia && !rozwiaz && PendriveDoLaptopika.trzymany)
         {
             PendriveDoLaptopika.trzymany2 = true;
@@ -59,6 +69,10 @@ public class Laptopik : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(odleglosc.magnitude > odlegloscPodnoszenia || !mouseOver){
+            transform.gameObject.layer = LayerMask.NameToLayer("Default");
+        }
+
         odleglosc = player.position - transform.position;
 
 

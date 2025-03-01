@@ -24,7 +24,7 @@ public class Laptopik2 : MonoBehaviour
     bool wTrakcie;
     public GameObject salceson;
    
-
+    bool mouseOver = false;
 
     // Start is called before the first frame update
     void Start()
@@ -39,8 +39,17 @@ public class Laptopik2 : MonoBehaviour
 
     }
 
+    private void OnMouseExit(){
+        mouseOver = false;
+    }
+
     private void OnMouseOver()
-    {
+    {   
+        if(odleglosc.magnitude < odlegloscPodnoszenia){
+            transform.gameObject.layer = LayerMask.NameToLayer("Outline");
+        }
+        mouseOver = true;
+
         if (Input.GetKeyDown(KeyCode.E) && odleglosc.magnitude <= odlegloscPodnoszenia && !rozwiaz && PickupRouter.trzymany && !rozwiaz)
         {
             PickupRouter.trzymany2 = true;
@@ -64,7 +73,11 @@ public class Laptopik2 : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        if(odleglosc.magnitude > odlegloscPodnoszenia || !mouseOver){
+            transform.gameObject.layer = LayerMask.NameToLayer("Default");
+        }
+        
         //if (pokazLaptoka) player.SetParent(cum);
         odleglosc = player.position - transform.position;
 

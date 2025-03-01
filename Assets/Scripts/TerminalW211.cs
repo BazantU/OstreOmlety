@@ -26,6 +26,8 @@ public class TerminalW211 : MonoBehaviour
     bool chujniaOdDzi;
     bool roz = true;
 
+    bool mouseOver = false;
+
     void Start()
     {
         chujniaOdDzi = true;
@@ -36,6 +38,10 @@ public class TerminalW211 : MonoBehaviour
         rozwiazujeTerminal = false;
         textMesh.GetComponent<TextMesh>();
         text2.SetActive(false);
+    }
+
+    private void OnMouseExit(){
+        mouseOver = false;
     }
 
     private void OnMouseOver()
@@ -54,10 +60,19 @@ public class TerminalW211 : MonoBehaviour
             Cursor.visible = true;
 
         }
+
+        if(odleglosc.magnitude < podnoszenie){
+            transform.gameObject.layer = LayerMask.NameToLayer("Outline");
+        }
+        mouseOver = true;
     }
 
     void Update()
     {
+        if(odleglosc.magnitude > podnoszenie || !mouseOver){
+            transform.gameObject.layer = LayerMask.NameToLayer("Default");
+        }
+
         odleglosc = player.position - transform.position;
         if (textMesh.text == "uodo" || textMesh.text == "UODO")
         {

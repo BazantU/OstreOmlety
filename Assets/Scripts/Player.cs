@@ -18,15 +18,11 @@ public class Player : MonoBehaviour
     public Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
-    [HideInInspector]
     public bool canMove = true;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        characterController = GetComponent<CharacterController>(); 
     }
 
     void Update()
@@ -40,6 +36,13 @@ public class Player : MonoBehaviour
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
+        if(canMove){
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }else{
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {

@@ -30,5 +30,17 @@ public class OtwuszKsiazke : MonoBehaviour
             transform.localRotation = rotacja;
             otwarta = false;
         }
+
+        transform.parent.gameObject.layer = LayerMask.NameToLayer("Outline");
+        foreach(Transform child in transform.parent){
+            child.gameObject.layer = LayerMask.NameToLayer("Outline");
+        }
+    }
+
+    private void OnMouseExit(){
+        transform.parent.gameObject.layer = LayerMask.NameToLayer("Default");
+        foreach(Transform child in transform.parent){
+            child.gameObject.layer = LayerMask.NameToLayer("Default");
+        }
     }
 }

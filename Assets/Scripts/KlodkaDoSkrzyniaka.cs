@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class KlodkaDoSkrzyniaka : MonoBehaviour
 {
@@ -46,6 +48,8 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
 
     public bool rozwiazanaZagadka2;
 
+    bool mouseOver = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -56,8 +60,28 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
         pen.SetActive(false);
     }
 
+    private void OnMouseExit(){
+        mouseOver = false;
+    }
+
     private void OnMouseOver()
     {
+        if(distanceToPlayer.magnitude < pickUpRange){
+            transform.parent.gameObject.layer = LayerMask.NameToLayer("Outline");
+            foreach(Transform child in transform.parent){
+                child.gameObject.layer = LayerMask.NameToLayer("Outline");
+
+                foreach(Transform child_child in child){
+                    child_child.gameObject.layer = LayerMask.NameToLayer("Outline");
+
+                    foreach(Transform child_child_child in child_child){
+                        child_child_child.gameObject.layer = LayerMask.NameToLayer("Outline");
+                    }
+                }
+            }
+        }
+        mouseOver = true;
+
         if (Input.GetKeyDown(KeyCode.E) && distanceToPlayer.magnitude <= pickUpRange && !Pickup.slotFull && !PickupKartka.slotFull)
         {
             Pickup.slotFull = true;
@@ -92,7 +116,22 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
         }
     }
     void Update()
-    {
+    {   
+        if(distanceToPlayer.magnitude > pickUpRange || !mouseOver){
+            transform.parent.gameObject.layer = LayerMask.NameToLayer("Default");
+            foreach(Transform child in transform.parent){
+                child.gameObject.layer = LayerMask.NameToLayer("Default");
+
+                foreach(Transform child_child in child){
+                    child_child.gameObject.layer = LayerMask.NameToLayer("Default");
+
+                    foreach(Transform child_child_child in child_child){
+                        child_child_child.gameObject.layer = LayerMask.NameToLayer("Default");
+                    }
+                }
+            }
+        }
+
         if (!pokaz)
         {
             text11.SetActive(false);

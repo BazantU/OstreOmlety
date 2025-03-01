@@ -20,7 +20,7 @@ public class PickupKartka : MonoBehaviour
 
     Vector3 siu = new Vector3(-13.7505999f, 4.22580004f, 9.02980042f);
 
-
+    bool mouseOver = false;
 
     // Start is called before the first frame update
     void Start()
@@ -41,15 +41,27 @@ public class PickupKartka : MonoBehaviour
         }
     }
     
+    private void OnMouseExit(){
+        mouseOver = false;
+    }
 
     private void OnMouseOver()
     {
         if (!equiped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
+
+        if(distanceToPlayer.magnitude < pickUpRange){
+            transform.gameObject.layer = LayerMask.NameToLayer("Outline");
+        }
+        mouseOver = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(distanceToPlayer.magnitude > pickUpRange || !mouseOver){
+            transform.gameObject.layer = LayerMask.NameToLayer("Default");
+        }
+
         distanceToPlayer = player.position - transform.position;
         
 
