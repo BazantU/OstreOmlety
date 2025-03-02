@@ -22,6 +22,9 @@ public class PendriveDoLaptopikaWos : MonoBehaviour
     public Transform laptopik;
     public static bool udaloSie;
 
+    DzwiekHandler dzwiekHandler;
+    bool gral = false;
+
     bool mouseOver = false;
 
     // Start is called before the first frame update
@@ -41,7 +44,7 @@ public class PendriveDoLaptopikaWos : MonoBehaviour
             bcollider.isTrigger = true;
             trzymany = true;
         }
-        
+        dzwiekHandler = player.GetComponent<DzwiekHandler>();
     }
 
     private void OnMouseExit(){
@@ -77,6 +80,11 @@ public class PendriveDoLaptopikaWos : MonoBehaviour
             udaloSie = true;
             PickupKartka.slotFull = false;
             Pickup.slotFull = false;
+
+            if(!gral){
+                gral = true;
+                dzwiekHandler.graj("pendrive");
+            }
         }
 
         if (equiped && Input.GetKeyDown(KeyCode.Q)) Drop();

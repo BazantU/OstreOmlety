@@ -20,6 +20,11 @@ public class Player : MonoBehaviour
 
     public bool canMove = true;
 
+    public DzwiekHandler dzwiekHandler;
+
+    public Transform reka;
+    bool graloDzwiekPodnoszenia = false;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>(); 
@@ -61,7 +66,10 @@ public class Player : MonoBehaviour
 
 
         characterController.Move(moveDirection * Time.deltaTime);
-
+        
+        if(canMove && characterController.isGrounded && (characterController.velocity.x > 0.2f || characterController.velocity.z > 0.2f)){
+            dzwiekHandler.graj("kroki");
+        }
 
         if (canMove)
         {
@@ -70,5 +78,11 @@ public class Player : MonoBehaviour
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
+
+        if(reka.childCount > 0 && !graloDzwiekPodnoszenia){
+            graloDzwiekPodnoszenia = true;
+            dzwiekHandler.graj("item");
+        }
+        if(reka.childCount <= 0){graloDzwiekPodnoszenia = false;}
     }
 }

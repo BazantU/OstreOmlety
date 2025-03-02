@@ -49,7 +49,7 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
     public bool rozwiazanaZagadka2;
 
     bool mouseOver = false;
-
+    DzwiekHandler dzwiekHandler;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +58,7 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
         rozwiazanaZagadka2 = false;
         pokaz = false;
         pen.SetActive(false);
+        dzwiekHandler = player.GetComponent<DzwiekHandler>();
     }
 
     private void OnMouseExit(){
@@ -155,14 +156,16 @@ public class KlodkaDoSkrzyniaka : MonoBehaviour
         distanceToPlayer = player.position - transform.position;
         
         
-        if (text1.text == "H" && text2.text == "E" && text3.text == "Z" && text4.text == "O" && text5.text == "A") 
+        if (text1.text == "H" && text2.text == "E" && text3.text == "Z" && text4.text == "O" && text5.text == "A" && !rozwiazanaZagadka) 
         {
             rozwiazanaZagadka = true;
+            dzwiekHandler.graj("chest");
         }
 
-        if (text1.text == "8" && text2.text == "1" && text3.text == "1" && text4.text == "1" && text5.text == "1")
+        if (text1.text == "8" && text2.text == "1" && text3.text == "1" && text4.text == "1" && text5.text == "1" && !rozwiazanaZagadka2)
         {
             rozwiazanaZagadka2 = true;
+            dzwiekHandler.graj("chest");
         }
 
         if (Input.GetKeyDown(KeyCode.Q) && distanceToPlayer.magnitude <= pickUpRange && player.transform.parent == cum)

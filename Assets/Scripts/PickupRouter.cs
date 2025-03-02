@@ -23,6 +23,9 @@ public class PickupRouter : MonoBehaviour
     public static bool udaloSie;
     public GameObject kabel;
 
+    DzwiekHandler dzwiekHandler;
+    bool gral = false;
+
     bool mouseOver = false;
 
     // Start is called before the first frame update
@@ -43,7 +46,7 @@ public class PickupRouter : MonoBehaviour
             bcollider.isTrigger = true;
             trzymany = true;
         }
-
+        dzwiekHandler = player.GetComponent<DzwiekHandler>();
     }
 
     private void OnMouseExit(){
@@ -81,6 +84,11 @@ public class PickupRouter : MonoBehaviour
             PickupKartka.slotFull = false;
             Pickup.slotFull = false;
             kabel.SetActive(true);
+
+            if(!gral){
+                gral = true;
+                dzwiekHandler.graj("pendrive");
+            }
         }
 
         if (equiped && Input.GetKeyDown(KeyCode.Q)) Drop();

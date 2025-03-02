@@ -20,6 +20,8 @@ public class timerUndButton : MonoBehaviour
     // Vector3(3.29500008,-0.0820000023,14.0900002)
     // Vector3(3.29500008,-0.116999999,14.0900002)
 
+    public DzwiekHandler dzwiekHandler;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,8 +41,9 @@ public class timerUndButton : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || (Input.GetKeyDown(KeyCode.E)))
         {
+            if(!wcisnieto){dzwiekHandler.graj("koniec");}
             textTiimera.SetActive(true);
             czasGry.SetActive(true);
             licz = false;

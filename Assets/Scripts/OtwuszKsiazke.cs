@@ -8,6 +8,8 @@ public class OtwuszKsiazke : MonoBehaviour
     Quaternion rotacja;
     private bool otwarta = false;
 
+    public DzwiekHandler dzwiekHandler;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +25,14 @@ public class OtwuszKsiazke : MonoBehaviour
             transform.localPosition = new Vector3(1.541f, 0, 0);
             transform.localRotation = Quaternion.Euler(-269.98f, 180, 0);
             otwarta=true;
+            dzwiekHandler.graj("book", true);
         }
         else if (otwarta && Input.GetKeyDown(KeyCode.E))
         {
             transform.localPosition = pozycja;
             transform.localRotation = rotacja;
             otwarta = false;
+            dzwiekHandler.graj("book", true);
         }
 
         transform.parent.gameObject.layer = LayerMask.NameToLayer("Outline");

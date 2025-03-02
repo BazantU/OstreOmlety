@@ -76,6 +76,9 @@ public class TerminalW211 : MonoBehaviour
         odleglosc = player.position - transform.position;
         if (textMesh.text == "uodo" || textMesh.text == "UODO")
         {
+            if(!rozwiazanoTerminal){
+                player.GetComponent<DzwiekHandler>().graj("pass_kubel");
+            }
             rozwiazanoTerminal = true;
             textMesh.text = null;
             chujniaOdDzi = true;

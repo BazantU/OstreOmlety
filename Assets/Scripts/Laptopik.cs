@@ -22,7 +22,9 @@ public class Laptopik : MonoBehaviour
     public GameObject dzi;
     bool chuj32 = true;
 
+    DzwiekHandler dzwiekHandler;
     bool mouseOver = false;
+    bool once = true;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,8 @@ public class Laptopik : MonoBehaviour
         text1 = text.GetComponent<TextMesh>();
         kartka2.SetActive(false);
         pokazLaptoka2 = false;
+
+        dzwiekHandler = player.GetComponent<DzwiekHandler>();
     }
 
     private void OnMouseExit(){
@@ -87,19 +91,27 @@ public class Laptopik : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
 
         }
-        if (text1.text == "cidH8Wp)qi8K(b!M" && Input.GetKeyDown(KeyCode.Return)) rozwiaz = true;
+        if (text1.text == "cidH8Wp)qi8K(b!M" && Input.GetKeyDown(KeyCode.Return)){
+            rozwiaz = true;
+            if(once){dzwiekHandler.graj("pass_laptop1"); once = false;}
+        }
         //if (text1.text == "pup") rozwiaz = true;
         if (rozwiaz)
         {
             text.SetActive(false);
             if (pokazLaptoka) kartka2.SetActive(true);
             else kartka2.SetActive(false);
+            if(!pokazLaptoka){}
             pokazLaptoka2 = true;
+            
             dzi.transform.localRotation = Quaternion.Euler(-90, 150, 180);
             dzi.transform.localPosition = new Vector3(0.172800004f, 0.0360002518f, -0.224999994f);
         }
         if (pokazLaptoka)
         {
+            if (text1.text != "cidH8Wp)qi8K(b!M" && Input.GetKeyDown(KeyCode.Return) && !rozwiaz){
+                dzwiekHandler.graj("incorrect_laptop1");
+            }
             foreach (char c in Input.inputString)
             {
                 if (c == '\b')
