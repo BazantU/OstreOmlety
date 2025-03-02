@@ -12,22 +12,25 @@ public class LaptopikWos : MonoBehaviour
     public GameObject salceson;
     public GameObject komunikat1;
     public GameObject komunikat2;
+    public GameObject komunikat3;
     public GameObject cam;
     public bool pokazLaptoka;
     public GameObject text;
     public TMP_InputField text1;
-    public bool pokazLaptoka2;
+    public bool pokazLaptoka2; // po kliknięciu przycisku ma informować o kartce pod stołem
+    public bool pokazLaptoka3; // ma informować o zniknięciu salcesona
 
     Vector3 odleglosc;
     bool rozwiazano;
     bool mouseOver;
-    bool pendriveDoLaptopika;
 
     void Start()
     {
         Uj.SetActive(false);
-        pendriveDoLaptopika = false;
         rozwiazano = false;
+        pokazLaptoka = false;
+        pokazLaptoka2 = false;
+        pokazLaptoka3 = false;
     }
 
 
@@ -73,6 +76,8 @@ public class LaptopikWos : MonoBehaviour
             cam.GetComponent<SC_HeadBobber>().enabled = true;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            pokazLaptoka = false;
+            pokazLaptoka2 = false;
 
         }
         if (text1.text == "1945" && Input.GetKeyDown(KeyCode.Return)) rozwiazano = true;
@@ -82,7 +87,7 @@ public class LaptopikWos : MonoBehaviour
             text.SetActive(false);
             if (pokazLaptoka) komunikat2.SetActive(true);
             else komunikat2.SetActive(false);
-            pokazLaptoka2 = true;
+            pokazLaptoka3 = true;
             salceson.SetActive(false);
         }
     }
@@ -90,18 +95,31 @@ public class LaptopikWos : MonoBehaviour
     private void LateUpdate()
     {
         if (!pokazLaptoka) schowajFunkcja();
-        else if (pokazLaptoka) pokazFunkcja();
-
-        if (pokazLaptoka) player.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        if (pokazLaptoka) pokazFunkcja();
     }
 
     void pokazFunkcja()
     {
         Uj.SetActive(true);
-        text.SetActive(true);
-        if (pokazLaptoka2){
+        // text.SetActive(true);
+        if(!pokazLaptoka3)
+        {
+            if(!pokazLaptoka2){
+                komunikat1.SetActive(true);
+                komunikat2.SetActive(false);
+                komunikat3.SetActive(false);
+            }
+            if (pokazLaptoka2){
+                komunikat1.SetActive(false);
+                komunikat2.SetActive(true);
+                komunikat3.SetActive(false);
+            }
+        }
+        if(pokazLaptoka3)
+        {
             komunikat1.SetActive(false);
-
+            komunikat2.SetActive(false);
+            komunikat3.SetActive(true);
         }
     }
     void schowajFunkcja()
