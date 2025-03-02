@@ -28,7 +28,7 @@ public class timerUndButton : MonoBehaviour
         licz = true;
         wcisnieto = false;
         wcisnieto2 = false;
-        transform.localPosition = new Vector3(3.29500008f, -0.082f, 14.0900002f);
+        //transform.localPosition = new Vector3(3.29500008f, -0.082f, 14.0900002f);
     }
 
     bool mouseOver = false;

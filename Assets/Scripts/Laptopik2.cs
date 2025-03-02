@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Unity.Mathematics;
 using UnityEngine;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -22,7 +23,8 @@ public class Laptopik2 : MonoBehaviour
     public GameObject dzi;
     bool chuj32 = true;
     bool wTrakcie;
-    public GameObject salceson;
+    // public GameObject salceson;
+    public GameObject drzwi;
    
     bool mouseOver = false;
 
@@ -108,7 +110,10 @@ public class Laptopik2 : MonoBehaviour
             dzi.transform.localRotation = Quaternion.Euler(-90, 150, 180);
             dzi.transform.localPosition = new Vector3(0.172800004f, 0.0360002518f, -0.224999994f);
             pokazLaptoka = false;
-            salceson.SetActive(false);
+            // salceson.SetActive(false);
+            drzwi.transform.localRotation = Quaternion.Euler(-90, 0, 333);
+            drzwi.transform.localPosition = new Vector3(0.172800004f, 0f, -0.224999994f);
+
         }
         if (pokazLaptoka)
         {
