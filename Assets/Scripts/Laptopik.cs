@@ -89,7 +89,7 @@ public class Laptopik : MonoBehaviour
             cam.GetComponent<SC_HeadBobber>().enabled = true;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-
+            chuj32 = true;
         }
         if (text1.text == "cidH8Wp)qi8K(b!M" && Input.GetKeyDown(KeyCode.Return)){
             rozwiaz = true;
