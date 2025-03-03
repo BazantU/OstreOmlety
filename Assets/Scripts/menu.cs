@@ -12,6 +12,8 @@ public class menu : MonoBehaviour
     public Player skryptPlayer;
 
     public Canvas canvasMenu;
+    public Canvas canvasPauzaESC;
+    public Canvas canvasMenuPauza;
     public Volume menuVFX;
     public float predkoscObrotu;
 
@@ -23,6 +25,8 @@ public class menu : MonoBehaviour
         kameraGracza.enabled = false;
 
         canvasMenu.enabled = true;
+        canvasPauzaESC.enabled = false;
+        canvasMenuPauza.enabled = false;
         menuVFX.enabled = true;
     }
 
@@ -31,6 +35,32 @@ public class menu : MonoBehaviour
         if(kameraMenu.enabled){
             kameraMenu.transform.Rotate(0, predkoscObrotu * Time.deltaTime, 0);
         }
+
+        if(!canvasMenu.enabled){
+            if(!skryptPlayer.enabled || !skryptPlayer.canMove){
+                canvasPauzaESC.enabled = false;
+            }else{
+                canvasPauzaESC.enabled = true;
+            }
+        }
+
+        if(canvasPauzaESC.enabled && Input.GetKeyDown(KeyCode.Escape)){
+            canvasMenuPauza.enabled = true;
+            canvasPauzaESC.enabled = false;
+            
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            skryptPlayer.canMove = false;
+        }
+    }
+
+    public void unpause(){
+        canvasMenuPauza.enabled = false;
+        canvasPauzaESC.enabled = true;
+        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        skryptPlayer.canMove = true;
     }
 
     public void graj(){
@@ -40,6 +70,7 @@ public class menu : MonoBehaviour
         kameraGracza.enabled = true;
 
         canvasMenu.enabled = false;
+        canvasPauzaESC.enabled = true;
         menuVFX.enabled = false;
     }
 

@@ -10,6 +10,7 @@ public class PickupKartka : MonoBehaviour
     public Transform player, hand, cam;
     public float pickUpRange;
     public float dropForwardForce, dropUpwardForce;
+    public Laptopik laptopikSkrypt;
 
     public bool equiped;
     public static bool slotFull;
@@ -71,7 +72,11 @@ public class PickupKartka : MonoBehaviour
             transform.localRotation = Quaternion.Euler(Vector3.zero);
         }
 
-        if (equiped && Input.GetKeyDown(KeyCode.Q)) Drop();
+        if (equiped && Input.GetKeyDown(KeyCode.Q)){
+            if(!laptopikSkrypt.pokazLaptoka){
+                Drop();
+            }
+        }
 
     }
     private void PickUp()
